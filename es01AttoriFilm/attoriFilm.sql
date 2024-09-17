@@ -24,5 +24,27 @@ FROM FILM
 WHERE (Genere = 'Fantascienza' AND Nazionalità = 'Giappone' AND AnnoProduzione > 1990) 
    OR (Genere = 'Fantascienza' AND Nazionalità = 'Francia');
 
-/*5- I titolo dei film dello stesso regista di “Casablanca”
+/*5- I titolo dei film dello stesso regista di “Casablanca”*/
+
+SELECT Titolo
+FROM FILM
+WHERE Regista = (SELECT Regista FROM FILM WHERE Titolo = 'Casablanca');
+
+/*6- Il titolo ed il genere dei film proiettati il giorno di Natale 2004*/
+
+SELECT F.Titolo, F.Genere
+FROM FILM F
+JOIN PROIEZIONI P ON F.CodFilm = P.CodFilm
+WHERE P.DataProiezione = '2004-12-25';
+
+/*7- Il titolo ed il genere dei film proiettati a Napoli il giorno di Natale 2004*/
+
+SELECT F.Titolo, F.Genere
+FROM FILM F
+JOIN PROIEZIONI P ON F.CodFilm = P.CodFilm
+JOIN SALE S ON P.CodSala = S.CodSala
+WHERE P.DataProiezione = '2004-12-25' AND S.Città = 'Napoli';
+
+
+
 
